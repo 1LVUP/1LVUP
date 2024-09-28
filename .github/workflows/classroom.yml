@@ -1,0 +1,22 @@
+name: GitHub Classroom Workflow
+
+on:
+  push:
+    paths-ignore:
+      # - '.github/**'
+      - README.md
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+
+jobs:
+  build:
+    name: Autograding
+    runs-on: dell
+    steps:
+      - uses: actions/checkout@v2
+      - name: Copy local test code
+        run: mkdir -p ./app/src/test/java/ && cp -r /home/jwkim/solution/hw1/* ./app/src/test/java/
+      - uses: education/autograding@v1
